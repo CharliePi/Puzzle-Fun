@@ -51,18 +51,17 @@ public class Player : MonoBehaviour
         {
 
             //Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-            //Camera camera = GetComponent<GameObject.Camera>();
-            Vector2 p = camera.WorldToScreenPoint(new Vector2((Input.mousePosition.x), (Input.mousePosition.y)));
-            Vector2 betweenTwoFerns = new Vector2(rb2d.position.x - (Input.mousePosition.x), rb2d.position.y - (Input.mousePosition.y));
+            Camera camera = Camera.main;
+            //Vector2 p = camera.WorldToScreenPoint(new Vector2((Input.mousePosition.x), (Input.mousePosition.y)));
+            Vector2 p = camera.ScreenToWorldPoint(new Vector2((Input.mousePosition.x), (Input.mousePosition.y)));
+            Vector2 betweenTwoFerns = new Vector2(rb2d.position.x - (p.x), rb2d.position.y - (p.y));
             Vector2 fixedVec = p.normalized;
             print("p" + p);
-            print("adj pos " +betweenTwoFerns);
-            print("charpos " +rb2d.position);
-            //if ((-Mathf.Log(p.magnitude) > 1)) { }
-            //rb2d.AddForce(betweenTwoFerns.normalized * -Mathf.Log(1));
-            //else
-            // rb2d.AddForce(-(betweenTwoFerns.normalized * -Mathf.Log(p.magnitude/2)));
-            rb2d.AddForce(-p);
+            print("adj pos " + betweenTwoFerns);
+            print("charpos " + rb2d.position);
+            print("charpos " + Input.mousePosition.x + " " + Input.mousePosition.y);
+            rb2d.AddForce((betweenTwoFerns.normalized * (100-Mathf.Log(betweenTwoFerns.magnitude))));
+            //rb2d.AddForce(-p);
         }
 
     }
