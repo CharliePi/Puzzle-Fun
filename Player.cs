@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         //if( Input.GetMouseButton(0) )
         //rb2d.AddForce(Vector2.up * jumpPower);
 
-
+        int clickTime = 0;
         if (Input.GetMouseButton(0))
         {
 
@@ -60,8 +60,14 @@ public class Player : MonoBehaviour
             print("adj pos " + betweenTwoFerns);
             print("charpos " + rb2d.position);
             print("charpos " + Input.mousePosition.x + " " + Input.mousePosition.y);
-            rb2d.AddForce((betweenTwoFerns.normalized * (100-Mathf.Log(betweenTwoFerns.magnitude))));
+            if(Mathf.Log(betweenTwoFerns.magnitude) < 1 && clickTime < 1)
+            rb2d.AddForce((betweenTwoFerns.normalized * (1 - Mathf.Log(betweenTwoFerns.magnitude))*100));
             //rb2d.AddForce(-p);
+            clickTime++;
+        }
+        else
+        {
+            clickTime = 0;
         }
 
     }
