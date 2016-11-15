@@ -8,36 +8,60 @@ public class DoorScript : MonoBehaviour
 
     public bool touch;
 
+    private Player player;
+
 	// Use this for initialization
-    // Create player object
 	void Start ()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        player = gameObject.GetComponentInParent<Player>();
     }
 	
 	// Update is called once per frame
     // Check if player is touching door and pressing up; if yes, change level
 	void Update ()
     {
-	    if (Input.GetButtonDown("Vertical") && touch == true)
+        //Destry Lock
+        print("SceneIndex: " + sceneIndex);
+        if (sceneIndex > 3)
         {
-            SceneManager.LoadScene(sceneIndex + 1);
-            print(touch);
+            if (Input.GetButtonDown("Vertical") && touch == true && player.key == true)
+            {
+                SceneManager.LoadScene(sceneIndex + 1);
+            }
         }
+        else
+        {
+            if (Input.GetButtonDown("Vertical") && touch == true)
+            {
+                SceneManager.LoadScene(sceneIndex + 1);
+            }
+        }
+	    
 	}
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        touch = true;
+        if (col.gameObject.tag == "door")
+        {
+            touch = true;
+        }
+        
     }
 
     void OnTriggerStay2D(Collider2D col)
     {
-        touch = true;
+        if (col.gameObject.tag == "door")
+        {
+            touch = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
-        touch = false;
+        if (col.gameObject.tag == "door")
+        {
+            touch = false;
+        }
     }
 }
