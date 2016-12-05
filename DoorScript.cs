@@ -8,13 +8,13 @@ public class DoorScript : MonoBehaviour
 
     public bool touch;
 
-    private Player player;
+    public Player player;
 
 	// Use this for initialization
 	void Start ()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        player = gameObject.GetComponentInParent<Player>();
+        //player = gameObject.GetComponentInParent<Player>();
     }
 	
 	// Update is called once per frame
@@ -22,7 +22,7 @@ public class DoorScript : MonoBehaviour
 	void Update ()
     {
         //Destry Lock
-        print("SceneIndex: " + sceneIndex);
+        //print("SceneIndex: " + sceneIndex);
         if (sceneIndex > 3)
         {
             if (Input.GetButtonDown("Vertical") && touch == true && player.key == true)
@@ -42,26 +42,16 @@ public class DoorScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "door")
-        {
             touch = true;
-        }
-        
     }
 
     void OnTriggerStay2D(Collider2D col)
     {
-        if (col.gameObject.tag == "door")
-        {
-            touch = true;
-        }
+        touch = true;
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.tag == "door")
-        {
-            touch = false;
-        }
+        touch = false;
     }
 }

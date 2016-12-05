@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HammerScript : MonoBehaviour {
+public class HammerScript : MonoBehaviour
+{
     public float maxSpeed = 3;
     public float speed = 75f;
     protected float h = 1;

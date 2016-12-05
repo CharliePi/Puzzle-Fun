@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BotGroundCheck : MonoBehaviour {
+public class BotGroundCheck : MonoBehaviour
+{
     private BotScript bot;
 
 
